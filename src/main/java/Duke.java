@@ -22,21 +22,56 @@ public class Duke {
         while (checkNextInput()) {
             try {
                 String input = readInput();
-                if (input.strip().toLowerCase().startsWith("bye")) {
-                    displayOutput("Bye! Hope to see you again :-)");
+                String output = parseInput(input);
+                displayOutput(output);
+                if (output.toLowerCase().startsWith("bye")) {
                     break;
-                } else if (input.strip().toLowerCase().startsWith("list")) {
-                    displayOutput(getListOfTasks());
-                } else if (input.strip().toLowerCase().startsWith("done")) {
-                    displayOutput(markAsDone(input));
-                } else if (checkValidAdd(input)) {
-                    displayOutput(addTask(input));
-                } else {
-                    displayOutput("Unrecognized Command!");
                 }
             } catch (DukeException e) {
                 displayOutput(e.getMessage());
             }
+        }
+    }
+
+    private static String parseInput(String input) throws DukeException {
+        String cleanedInput = input.strip().toLowerCase();
+        if (cleanedInput.startsWith("bye")) {
+            return "Bye! Hope to see you again :-)";
+        } else if (cleanedInput.startsWith("list")) {
+            return getListOfTasks();
+        } else if (cleanedInput.startsWith("done")) {
+            return markAsDone(input);
+        } else if (checkValidAdd(input)) {
+            return addTask(input);
+        } else if (cleanedInput.startsWith("delete")) {
+            return deleteTask(input);
+        } else {
+            return "Unrecognized Command!";
+        }
+    }
+
+    private static String deleteTask(String input) throws InvalidDeleteDukeException {
+        String cleanedInput = input.strip().toLowerCase();
+        Pattern p = Pattern.compile("\\d+");
+        Matcher m = p.matcher(cleanedInput);
+        ArrayList<Integer> taskIds = new ArrayList<>();
+        while (m.find()) {
+            taskIds.add(Integer.parseInt(m.group()));
+        }
+        if (taskIds.size() != 1) {
+            throw new InvalidDeleteDukeException("Invalid \"delete\" command. Please enter only ONE task ID.");
+        }
+        return removeTaskFromList(taskIds.get(0));
+    }
+
+    private static String removeTaskFromList(int id) throws InvalidDeleteDukeException {
+        try {
+            Task t = tasks.remove(id - 1);
+            return "Nice! I've removed this task from the list:\n"
+                    + "  " + t.toString() + "\n"
+                    + "Now you have " + tasks.size() + " tasks in the list.";
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidDeleteDukeException("Invalid \"delete\" command. Please enter a valid task ID.");
         }
     }
 
