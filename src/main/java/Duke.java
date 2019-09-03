@@ -49,16 +49,55 @@ public class Duke {
         StringBuilder finalOutput = listOfTaskIds.size() == 1
                 ? new StringBuilder("Nice! I've marked this task as done:\n")
                 : new StringBuilder("Nice! I've marked these tasks as done:\n");
-        for (int id : listOfTaskIds) {
-            tasks.get(id - 1).setDone(true);
-            finalOutput.append("  " + tasks.get(id - 1).toString() + "\n");
+        for (int i = 0; i < listOfTaskIds.size(); i++) {
+            tasks.get(listOfTaskIds.get(i) - 1).setDone(true);
+            finalOutput.append("  " + tasks.get(listOfTaskIds.get(i) - 1).toString());
+            if (i != listOfTaskIds.size() - 1) {
+                finalOutput.append("\n");
+            }
         }
         return finalOutput.toString();
     }
 
     private static String addTask(String task) {
-        tasks.add(new Task(task));
-        return "added: " + tasks.get(tasks.size() - 1).getDescription();
+        String taskType = task.split("\\s+")[0];
+        if (taskType.equalsIgnoreCase("todo")) {
+            addTodo(task);
+        } else if (taskType.equalsIgnoreCase("event")) {
+            addEvent(task);
+        } else {
+            addDeadline(task);
+        }
+        return "Nice! I've added this task to the list:\n"
+                + "  " + tasks.get(tasks.size() - 1).toString() + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.";
+    }
+
+    private static void addTodo(String task) {
+        String[] tokens = task.split("\\s+");
+        StringBuilder description = new StringBuilder();
+        for (int i = 1; i < tokens.length; i++) {
+            description.append(tokens[i] + " ");
+        }
+        tasks.add(new Todo(description.toString().strip()));
+    }
+
+    private static void addEvent(String task) {
+        task = task.strip();
+        int indexOfEvent = task.indexOf("event");
+        int indexOfAt = task.indexOf("/at");
+        String description = task.substring(indexOfEvent + 5, indexOfAt).strip();
+        String at = task.substring(indexOfAt + 3).strip();
+        tasks.add(new Event(description, at));
+    }
+
+    private static void addDeadline(String task) {
+        task = task.strip();
+        int indexOfDeadline = task.indexOf("deadline");
+        int indexOfBy = task.indexOf("/by");
+        String description = task.substring(indexOfDeadline + 8, indexOfBy).strip();
+        String by = task.substring(indexOfBy + 3).strip();
+        tasks.add(new Deadline(description, by));
     }
 
     private static String getListOfTasks() {
