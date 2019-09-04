@@ -28,6 +28,12 @@ public class Ui {
         return sc.nextLine();
     }
 
+    public void showLoadingError() {
+        displayOutput("WARNING! UNABLE TO LOAD AND/OR DESERIALIZE TASKS FROM DATA DIRECTORY. "
+                + "PLEASE CHECK THE FILEPATH.\n"
+                + "YOU MAY CONTINUE TO WORK WITHOUT ANY OF YOUR PREVIOUS TASKS.");
+    }
+
     public boolean checkNextInput() {
         return sc.hasNext();
     }

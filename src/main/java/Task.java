@@ -20,6 +20,12 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
+    public boolean getIsDone() {
+        return isDone;
+    }
+
+    public abstract String getTime();
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "]" + " " + description;

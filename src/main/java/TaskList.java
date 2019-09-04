@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -48,5 +49,13 @@ public class TaskList {
         return finalOutput.isBlank()
                 ? "Oops! The list is empty."
                 : finalOutput;
+    }
+
+    public void addAllTasks(ArrayList<Task> tasks) {
+        this.tasks.addAll(tasks);
+    }
+
+    public ArrayList<Task> getTasks() {
+        return (ArrayList<Task>) tasks.clone();
     }
 }

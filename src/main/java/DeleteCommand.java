@@ -10,7 +10,7 @@ public class DeleteCommand extends Command {
         this.input = input;
     }
 
-    public void execute(TaskList tasks, Ui ui) throws InvalidDeleteDukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDeleteDukeException {
         String cleanedInput = input.strip().toLowerCase();
         String output = deleteTask(cleanedInput, tasks);
         ui.displayOutput(output);

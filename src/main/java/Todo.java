@@ -6,6 +6,10 @@ public class Todo extends Task {
         super(description);
     }
 
+    public String getTime() {
+        return "";
+    }
+
     @Override
     public String toString() {
         return "[Todo] " + super.toString();

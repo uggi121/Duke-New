@@ -11,6 +11,10 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public String getTime() {
+        return at;
+    }
+
     @Override
     public String toString() {
         return "[Event] " + super.toString() + " (at: " + at + ")";

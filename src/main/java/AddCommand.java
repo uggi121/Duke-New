@@ -6,7 +6,7 @@ public class AddCommand extends Command {
         this.input = input;
     }
 
-    public void execute(TaskList tasks, Ui ui) throws InvalidTaskDukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskDukeException {
         String cleanedInput = input.strip().toLowerCase();
         Task t = makeTask(cleanedInput);
         String output = tasks.addTask(t);
