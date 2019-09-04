@@ -2,25 +2,44 @@ public class Parser {
 
     public Command parseInput(String input) throws DukeException {
         String cleanedInput = input.strip().toLowerCase();
-        if (cleanedInput.startsWith("bye")) {
-            return new ExitCommand();
-        } else if (cleanedInput.startsWith("list")) {
-            return new ListCommand();
+        if (isNullaryCommand(cleanedInput)) {
+            return makeNullaryCommand(cleanedInput);
+        } else if (isUnaryCommand(cleanedInput)) {
+            return makeUnaryCommand(cleanedInput);
         } else if (cleanedInput.startsWith("done")) {
-            return new DoneCommand(input);
-        } else if (checkValidAdd(input)) {
-            return new AddCommand(input);
-        } else if (cleanedInput.startsWith("delete")) {
-            return new DeleteCommand(input);
+            return new DoneCommand(cleanedInput);
         } else {
             throw new InvalidCommandDukeException("Unrecognised Command!");
         }
     }
 
-    private boolean checkValidAdd(String input) {
-        String processedString = input.strip().toLowerCase();
-        return processedString.startsWith("todo ") || processedString.startsWith("deadline ")
-                || processedString.startsWith("event ");
+    private boolean isNullaryCommand(String cleanedInput) {
+        return cleanedInput.startsWith("list") || cleanedInput.startsWith("bye");
+    }
+
+    private Command makeNullaryCommand(String cleanedInput) {
+        if (cleanedInput.startsWith("list")) {
+            return new ListCommand();
+        } else {
+            return new ExitCommand();
+        }
+    }
+
+    private boolean isUnaryCommand(String cleanedInput) {
+        return cleanedInput.startsWith("delete") || checkValidAdd(cleanedInput);
+    }
+
+    private Command makeUnaryCommand(String cleanedInput) {
+        if (cleanedInput.startsWith("delete")) {
+            return new DeleteCommand(cleanedInput);
+        } else {
+            return new AddCommand(cleanedInput);
+        }
+    }
+
+    private boolean checkValidAdd(String cleanedInput) {
+        return cleanedInput.startsWith("todo ") || cleanedInput.startsWith("deadline ")
+                || cleanedInput.startsWith("event ");
     }
 
 }
