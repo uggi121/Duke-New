@@ -19,11 +19,14 @@ public class Ui {
         displayOutput("Hello from\n" + LOGO);
     }
 
-    public void displayOutput(String output) {
+    public String displayOutput(String output) {
+        /*
         String bound = "     ____________________________________________________________\n     ";
         String intermediate = output.replace("\n", "\n     ");
         String finalOutput = bound + intermediate + "\n" + bound;
         System.out.println(finalOutput);
+         */
+        return getResponse(output);
     }
 
     public String readInput() {
@@ -34,6 +37,10 @@ public class Ui {
         displayOutput("WARNING! UNABLE TO LOAD AND/OR DESERIALIZE TASKS FROM DATA DIRECTORY. "
                 + "PLEASE CHECK THE FILEPATH.\n"
                 + "YOU MAY CONTINUE TO WORK WITHOUT ANY OF YOUR PREVIOUS TASKS.");
+    }
+
+    public String getResponse(String input) {
+        return input;
     }
 
     public boolean checkNextInput() {

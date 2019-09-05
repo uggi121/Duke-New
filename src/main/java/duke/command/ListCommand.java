@@ -6,9 +6,9 @@ import duke.ui.Ui;
 
 public class ListCommand extends Command {
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String listOfTasks = tasks.getListOfTasks();
-        ui.displayOutput(listOfTasks);
+        return listOfTasks;
     }
 
     public boolean checkExit() {

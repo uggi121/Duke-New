@@ -14,12 +14,12 @@ public class AddCommand extends Command {
         this.input = input;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public String execute(TaskList tasks, Ui ui, Storage storage)
             throws InvalidTaskDukeException, InvalidDateDukeException {
         String cleanedInput = input.strip().toLowerCase();
         Task t = makeTask(cleanedInput);
         String output = tasks.addTask(t);
-        ui.displayOutput(output);
+        return output;
     }
 
     public Task makeTask(String cleanedInput) throws InvalidTaskDukeException, InvalidDateDukeException {

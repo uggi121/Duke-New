@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class SaveCommand extends Command {
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskDukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskDukeException {
         try {
             ArrayList<Task> taskList = tasks.getTasks();
             ArrayList<String> stringTasks = new ArrayList<>();
@@ -22,8 +22,9 @@ public class SaveCommand extends Command {
                 stringTasks.add(serializedTask);
             }
             storage.saveTasks(stringTasks);
+            return "Tasks saved. Bye bye!";
         } catch (IOException e) {
-            ui.displayOutput("Unable to save tasks. Please check your file path.");
+            return "Unable to save tasks. Please check your file path.";
         }
     }
 

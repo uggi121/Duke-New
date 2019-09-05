@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class LoadCommand extends Command {
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             ArrayList<String> stringTasks = storage.loadTasks();
             ArrayList<Task> taskList = new ArrayList<>();
@@ -22,6 +22,7 @@ public class LoadCommand extends Command {
                 taskList.add(t);
             }
             tasks.addAllTasks(taskList);
+            return "Tasks Pre-Loaded";
         } catch (FileNotFoundException e) {
             throw new DukeException("File not found.");
         }

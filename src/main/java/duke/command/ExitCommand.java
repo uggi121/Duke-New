@@ -6,8 +6,8 @@ import duke.ui.Ui;
 
 public class ExitCommand extends Command {
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.displayOutput("Bye! See you again :-)");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return "Bye! See you again :-)";
     }
 
     public boolean checkExit() {

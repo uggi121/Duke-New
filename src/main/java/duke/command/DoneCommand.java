@@ -17,10 +17,10 @@ public class DoneCommand extends Command {
         this.input = input;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String cleanedInput = input.strip().toLowerCase();
         String output = markAsDone(cleanedInput, tasks);
-        ui.displayOutput(output);
+        return output;
     }
 
     private String markAsDone(String input, TaskList tasks) throws DukeException {

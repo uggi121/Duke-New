@@ -12,7 +12,7 @@ public class FindCommand extends Command {
         this.cleanedInput = cleanedInput;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFindDukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFindDukeException {
         if (cleanedInput.equalsIgnoreCase("find")
                 || cleanedInput.split("\\s+").length == 1) {
             throw new InvalidFindDukeException("Invalid find command! Please enter a description after \"find\"");
@@ -21,9 +21,9 @@ public class FindCommand extends Command {
                     .toLowerCase().strip();
             String matchedDescriptions = tasks.findTasks(descriptionToMatch);
             if (matchedDescriptions.isBlank()) {
-                ui.displayOutput("No matching tasks found!");
+                return "No matching tasks found!";
             } else {
-                ui.displayOutput(matchedDescriptions);
+                return matchedDescriptions;
             }
         }
     }
