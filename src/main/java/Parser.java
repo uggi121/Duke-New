@@ -26,12 +26,14 @@ public class Parser {
     }
 
     private boolean isUnaryCommand(String cleanedInput) {
-        return cleanedInput.startsWith("delete") || checkValidAdd(cleanedInput);
+        return cleanedInput.startsWith("delete") || checkValidAdd(cleanedInput) || cleanedInput.startsWith("find");
     }
 
     private Command makeUnaryCommand(String cleanedInput) {
         if (cleanedInput.startsWith("delete")) {
             return new DeleteCommand(cleanedInput);
+        } else if (cleanedInput.startsWith("find")) {
+            return new FindCommand(cleanedInput);
         } else {
             return new AddCommand(cleanedInput);
         }

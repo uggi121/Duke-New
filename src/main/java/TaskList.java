@@ -51,6 +51,21 @@ public class TaskList {
                 : finalOutput;
     }
 
+    public String findTasks(String descriptionToMatch) {
+        StringBuilder result = new StringBuilder();
+        boolean taskExists = false;
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getDescription().toLowerCase().contains(descriptionToMatch.toLowerCase())) {
+                if (taskExists) {
+                    result.append("\n");
+                }
+                result.append((i + 1) + ". " + tasks.get(i).toString());
+                taskExists = true;
+            }
+        }
+        return result.toString();
+    }
+
     public void addAllTasks(ArrayList<Task> tasks) {
         this.tasks.addAll(tasks);
     }
