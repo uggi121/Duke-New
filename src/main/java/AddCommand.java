@@ -6,14 +6,15 @@ public class AddCommand extends Command {
         this.input = input;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskDukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage)
+            throws InvalidTaskDukeException, InvalidDateDukeException {
         String cleanedInput = input.strip().toLowerCase();
         Task t = makeTask(cleanedInput);
         String output = tasks.addTask(t);
         ui.displayOutput(output);
     }
 
-    public Task makeTask(String cleanedInput) throws InvalidTaskDukeException {
+    public Task makeTask(String cleanedInput) throws InvalidTaskDukeException, InvalidDateDukeException {
         if (cleanedInput.startsWith("todo")) {
             return makeTodo(cleanedInput);
         } else if (cleanedInput.startsWith("deadline")) {
@@ -31,13 +32,13 @@ public class AddCommand extends Command {
                 description.append(tokens[i] + " ");
             }
             return new Todo(description.toString().strip());
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | InvalidTaskDukeException e) {
             throw new InvalidTodoDukeException("Oops! Invalid \"todo\" command. Please stick to this format:\n"
                     + "  \"todo [description]\"");
         }
     }
 
-    private Event makeEvent(String task) throws InvalidEventDukeException {
+    private Event makeEvent(String task) throws InvalidEventDukeException, InvalidDateDukeException {
         try {
             task = task.strip();
             int indexOfEvent = task.indexOf("event");
@@ -45,13 +46,13 @@ public class AddCommand extends Command {
             String description = task.substring(indexOfEvent + 5, indexOfAt).strip();
             String at = task.substring(indexOfAt + 3).strip();
             return new Event(description, at);
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | InvalidTaskDukeException e) {
             throw new InvalidEventDukeException("Oops! Invalid \"event\" command. Please stick to this format:\n"
                     + "  \"event [description] /at [time]\"");
         }
     }
 
-    private Deadline makeDeadline(String task) throws InvalidDeadlineDukeException {
+    private Deadline makeDeadline(String task) throws InvalidDeadlineDukeException, InvalidDateDukeException {
         try {
             task = task.strip();
             int indexOfDeadline = task.indexOf("deadline");
@@ -59,7 +60,7 @@ public class AddCommand extends Command {
             String description = task.substring(indexOfDeadline + 8, indexOfBy).strip();
             String by = task.substring(indexOfBy + 3).strip();
             return new Deadline(description, by);
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | InvalidTaskDukeException e) {
             throw new InvalidDeadlineDukeException("Oops! Invalid \"deadline\" command. Please stick to this format:\n"
                     + "  \"deadline [description] /by [time]\"");
         }

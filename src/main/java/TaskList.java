@@ -55,6 +55,7 @@ public class TaskList {
         this.tasks.addAll(tasks);
     }
 
+    @SuppressWarnings("unchecked")
     public ArrayList<Task> getTasks() {
         return (ArrayList<Task>) tasks.clone();
     }

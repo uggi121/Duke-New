@@ -9,7 +9,7 @@ public class Parser {
         } else if (cleanedInput.startsWith("done")) {
             return new DoneCommand(cleanedInput);
         } else {
-            throw new InvalidCommandDukeException("Unrecognised Command!");
+            throw new InvalidCommandDukeException("Unrecognized Command!");
         }
     }
 

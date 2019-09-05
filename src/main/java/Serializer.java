@@ -1,6 +1,6 @@
 public class Serializer {
 
-    public Task deserializeTask(String input) throws InvalidTaskDukeException {
+    public Task deserializeTask(String input) throws InvalidTaskDukeException, InvalidDateDukeException {
         String[] tokens = input.split(" \\| ");
         if (tokens[0].equals("T")) {
             return deserializeTodo(tokens);
@@ -13,7 +13,7 @@ public class Serializer {
         }
     }
 
-    private Task deserializeTodo(String[] tokens) {
+    private Task deserializeTodo(String[] tokens) throws InvalidTaskDukeException {
         Task t = new Todo(tokens[2]);
         if (tokens[1].equals("1")) {
             t.setDone(true);
@@ -21,7 +21,7 @@ public class Serializer {
         return t;
     }
 
-    private Task deserializeEvent(String[] tokens) {
+    private Task deserializeEvent(String[] tokens) throws InvalidDateDukeException, InvalidTaskDukeException {
         Task t = new Event(tokens[2], tokens[3]);
         if (tokens[1].equals("1")) {
             t.setDone(true);
@@ -29,7 +29,7 @@ public class Serializer {
         return t;
     }
 
-    private Task deserializeDeadline(String[] tokens) {
+    private Task deserializeDeadline(String[] tokens) throws InvalidDateDukeException, InvalidTaskDukeException {
         Task t = new Deadline(tokens[2], tokens[3]);
         if (tokens[1].equals("1")) {
             t.setDone(true);

@@ -1,4 +1,13 @@
      ____________________________________________________________
+     WARNING! UNABLE TO LOAD AND/OR DESERIALIZE TASKS FROM DATA DIRECTORY. PLEASE CHECK THE FILEPATH.
+     YOU MAY CONTINUE TO WORK WITHOUT ANY OF YOUR PREVIOUS TASKS.
+     ____________________________________________________________
+     
+     ____________________________________________________________
+     File not found. The directory entered is invalid
+     ____________________________________________________________
+     
+     ____________________________________________________________
      Hello from
       ____        _        
      |  _ \ _   _| | _____ 
@@ -20,22 +29,26 @@
      
      ____________________________________________________________
      Nice! I've added this task to the list:
-       [Deadline] [?] return book (by: Sept 5th)
+       [Deadline] [?] return book (by: sept 5th)
      Now you have 2 tasks in the list.
      ____________________________________________________________
      
      ____________________________________________________________
      Nice! I've marked these tasks as done:
        [Todo] [?] buy book
-       [Deadline] [?] return book (by: Sept 5th)
+       [Deadline] [?] return book (by: sept 5th)
      ____________________________________________________________
      
      ____________________________________________________________
      1. [Todo] [?] buy book
-     2. [Deadline] [?] return book (by: Sept 5th)
+     2. [Deadline] [?] return book (by: sept 5th)
      ____________________________________________________________
      
      ____________________________________________________________
-     Bye! Hope to see you again :-)
+     Bye! See you again :-)
+     ____________________________________________________________
+     
+     ____________________________________________________________
+     Unable to save tasks. Please check your file path.
      ____________________________________________________________
      

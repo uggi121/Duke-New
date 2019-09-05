@@ -3,8 +3,11 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
 
-    public Task(String description) {
+    public Task(String description) throws InvalidTaskDukeException {
         this.description = description;
+        if (description.isBlank()) {
+            throw new InvalidTaskDukeException("Description cannot be empty! Please enter a valid description.");
+        }
         this.isDone = false;
     }
 
