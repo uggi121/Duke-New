@@ -25,8 +25,14 @@ public class DateValidator {
                 return false;
             }
         }
-        Month month = Month.of(Integer.parseInt(dateParams.get(1)));
-        return checkValidity(dateParams, hasEndTime, month);
+        try {
+            Month month = Month.of(Integer.parseInt(dateParams.get(1)));
+            return checkValidity(dateParams, hasEndTime, month);
+        } catch (DateTimeException e) {
+            throw new InvalidDateDukeException("Invalid date format! Please ensure your date sticks to this format:\n"
+                    + "    Deadlines : \"DD/MM/YYYY HHMM\"\n"
+                    + "    Events : \"DD/MM/YYYY HHMM-HHMM\"");
+        }
     }
 
     private boolean checkValidity(ArrayList<String> dateParams, boolean hasEndTime, Month month)
